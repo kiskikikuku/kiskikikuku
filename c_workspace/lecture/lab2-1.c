@@ -22,7 +22,7 @@ int main(){
     printf("Size of char* : %ld byte\n", sizeof(char*));
     printf("Size of int*  : %ld byte\n", sizeof(int*));
     printf("Size of float* : %ld byte\n", sizeof(float*));
-    printf("Size of double* : %ld byte\n", sizeof(double*)); //각 타입 포인터형의 크기 출력 (32비트 컴파일러 - 4바이트, 64비트 컴파일러 - 8바이트)
+    printf("Size of double* : %ld byte\n", sizeof(double*)); //각 타입 포인터형의 크기 출력 (32비트 컴파일러이므로 전부 4바이트이다)
 
 
     return 0;
