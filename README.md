@@ -1,5 +1,5 @@
 ### Hi there 👋
-Welcome to my C practice repository\n
+Welcome to my C practice repository 
 here are many codes related to compiler and data structure lectures
 
 
