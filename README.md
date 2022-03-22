@@ -1,4 +1,7 @@
 ### Hi there 👋
+Welcome to my C practice repository
+here are many codes related to compiler and data structure lectures
+
 
 <!--
 **kiskikikuku** is a ✨ C / C++ HW/Algorithms ✨ repository because its `README.md` (this file) appears on your GitHub profile.
