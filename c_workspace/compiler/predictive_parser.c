@@ -28,3 +28,24 @@ char nexttoken() {
     }
 }
 
+void expr(){
+    if(lookahead == ()    
+}
+
+void rest1(){
+
+}
+
+void term(){
+
+}
+
+void rest2(){
+
+}
+
+void factor(){
+    
+}
+
+
