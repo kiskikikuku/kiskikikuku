@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 char nexttoken();
 void expr();
 void rest1();
@@ -8,17 +9,20 @@ void factor();
 char lookahead;
 
 void main(){
+        lookahead = nexttoken();
+        expr();
         if(lookahead == '$')
-            printf("parsing complete successfully\n");
+            printf("\n");
         else
             printf(" error\n");
+
 }
 
 void match(char token) {
     if(lookahead == token)
         lookahead = nexttoken(); //예측기호와 같으면 다음 토큰받음
     else {
-            printf("error\n");
+            printf(" error\n");
             exit(1);
     }
 }
@@ -34,20 +38,23 @@ char nexttoken() {
 }
 
 void expr(){
-    term(); printf("3 "); rest1();
-
+    if (isdigit(lookahead) || lookahead =='(')
+    {
+        term(); printf("3 "); rest1();
+    }
+    
     return;
 }
 
 void rest1(){
     if (lookahead == '+'){
-        match('+'); term(); print("1 "); rest1();
+        match('+'); term(); printf("1 "); rest1();
     }
-    else if(lookahead = '-')
-        match('-'); term(); print("2 "); rest1();
+    else if(lookahead == '-'){
+        match('-'); term(); printf("2 "); rest1();
+    }
+    else return;
 
-
-    
 }
 
 void term(){
@@ -56,11 +63,12 @@ void term(){
 
 void rest2(){
     if (lookahead == '*'){
-        match('*'); term(); print("4 "); rest2();
+        match('*'); factor(); printf("4 "); rest2();
     }
-    else if(lookahead = '-')
-        match('-'); term(); print("5 "); rest2();
+    else if(lookahead == '/'){
+        match('/'); factor(); printf("5 "); rest2();}
     
+    else return;
 }
 
 void factor(){
@@ -70,8 +78,10 @@ void factor(){
     else if (isdigit(lookahead)){
         match(lookahead);
     }
-    else 
-        printf("error");
+    else{
+        printf("error "); exit(1); //연산기호가 두번 연속 들어오면 에러
+    }
+    return;
 }
 
 
