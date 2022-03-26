@@ -79,7 +79,7 @@ void factor(){
         match(lookahead);
     }
     else{
-        printf("error "); exit(1); //연산기호가 두번 연속 들어오면 에러
+        printf("error \n"); exit(1); //연산기호가 두번 연속 들어오면 에러
     }
     return;
 }
