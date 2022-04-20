@@ -1,5 +1,7 @@
 #include<stdio.h>
 
+char nexttoken();
+
 char lookahead;
 
 void main(){
@@ -18,7 +20,7 @@ void match(char token) {
     }
 }
 
-char nexttoken() {
+char nexttoken(){
     char c;
 
     while(1){
@@ -28,24 +30,18 @@ char nexttoken() {
     }
 }
 
-void expr(){
-    if(lookahead == ()    
-}
-
 void rest1(){
 
 }
 
-void term(){
+void term() {
 
 }
 
-void rest2(){
+void rest2() {
 
 }
 
-void factor(){
+void factor() {
     
 }
-
-
