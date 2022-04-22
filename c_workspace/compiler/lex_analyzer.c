@@ -9,7 +9,7 @@ char c; // 문자 저장
 char nextchar(); // 다음 문자를 받음
 int retraction(); // other의 경우, 처리해주는 함수
 void main(){
-    
+    printf("-------------[2018068040]-----[Park Taehyun]-------------\n");
     while(1){
         switch (state)
         {
@@ -69,16 +69,16 @@ void main(){
         
         case 4: c = nextchar(); // i까지받은 상태
                 if(isalpha(c)){
-                    if(c == 'f')
-                        state = 5;
+                    if(c == 'f') // f인 경우 
+                        state = 5; // state = 5
                     else if (c == 'n')
-                        state = 6;
+                        state = 6; // n인 경우 state = 6
                 }
-                else if (isdigit(c))
-                    state = 8;
-                else{
-                    printf("9 ");
-                    state = retraction();
+                else if (isdigit(c)) //숫자의 경우 -> id
+                    state = 8; // state = 8로
+                else{ //외의 문자
+                    printf("9 "); //i까지는 식별자임
+                    state = retraction(); // 그 다음 문자는 invalid 처리
                 } 
 
                 break;
@@ -104,10 +104,10 @@ void main(){
                     else  //외의 문자인 경우 -> id
                         state = 8; 
                 }
-                else if (isdigit(c))
+                else if (isdigit(c)) // 숫자인 경우 -> id
                     state = 8;
 
-                else{
+                else{ // 외의 문자는 other임
                     printf("9 ");
                     state = retraction();
                 }
@@ -116,11 +116,11 @@ void main(){
         case 7: c = nextchar(); // int까지 받은 상태
                 if (isalpha(c) || isdigit(c)) // 다음 문자가 알파벳이나 숫자인 경우 -> id
                 {
-                    state = 8;
+                    state = 8; // state = 8
                 }
 
                 else {  // int
-                    printf("3 ");
+                    printf("3 "); // int가 인식됨, print 3
                     state = retraction(); // 다음 문자는 invalid이므로 fail처리
                 }
 
@@ -132,9 +132,9 @@ void main(){
                     state = 8;
                 }
 
-                else {
+                else { // other, 지금까지 인식된 문자들은 식별자토큰(print 9)
                     printf("9 ");
-                    state = retraction();
+                    state = retraction(); 
                 }
         default:
             break;
@@ -142,12 +142,12 @@ void main(){
     }
 }
 
-int retraction(){ // Invalid char의 경우
-    if(c == '$')
+int retraction(){ // Invalid char의 경우, 리트랙션
+    if(c == '$') //$면 종료
         exit(0);
-    printf("Invalid char '%c' \n", c);
+    printf("Invalid char '%c' \n", c); // 나머지의 경우, 출력해준다.
 
-    return 0;
+    return 0; // state 0으로 보낸다
 }
 
 char nextchar() { //문자를 입력받는다 개행문자는 skip, 입력받은 문자 반환
