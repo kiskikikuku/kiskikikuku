@@ -1,6 +1,5 @@
 #include<stdio.h>
-#include<stdlib.h>
-char nexttoken();
+char nextchar();
 void expr();
 void rest1();
 void term();
@@ -9,7 +8,7 @@ void factor();
 char lookahead;
 
 void main(){
-        lookahead = nexttoken();
+        lookahead = nextchar();
         expr();
         if(lookahead == '$')
             printf("\n");
@@ -20,20 +19,20 @@ void main(){
 
 void match(char token) {
     if(lookahead == token)
-        lookahead = nexttoken(); //예측기호와 같으면 다음 토큰받음
+        lookahead = nextchar(); //예측기호와 같으면 다음 토큰을 받음
     else {
             printf(" error\n");
             exit(1);
     }
 }
 
-char nexttoken() {
+char nextchar() {
     char c;
 
     while(1){
-            c = getchar();
-            if(c==' '|| c=='\t'|| c == '\n' || c == '\0') continue;
-            return(c);
+            c = getchar(); // 문자 1개를 토큰으로 입력받음
+            if(c==' '|| c=='\t'|| c == '\n' || c == '\0') continue; // 공백, 줄바꿈,탭, NULL문자의 경우에 한하여 다시 입력받음
+            return(c); // 입력받은 토큰값을 반환
     }
 }
 
@@ -79,7 +78,7 @@ void factor(){
         match(lookahead);
     }
     else{
-        printf("error \n"); exit(1); //연산기호가 두번 연속 들어오면 에러
+        printf("error \n"); exit(1); //연산기호가 두번 연속 들어오는 경우 체크
     }
     return;
 }
