@@ -3,18 +3,14 @@
 #include<stdlib.h>
 #include<string.h>
 
-
 int state=0; // 상태 번호
 char c; // 문자 저장
 
-char nextchar();
-int fail();
-
+char nextchar(); // 다음 문자를 받음
+int retraction(); // other의 경우, 처리해주는 함수
 void main(){
-
     
     while(1){
-
         switch (state)
         {
         case 0: c= nextchar();
@@ -25,7 +21,7 @@ void main(){
                      else state = 8; // 나머지 문자인 경우 -> state 8
                 }
 
-                else state = fail(); // 나머지는 fail
+                else state = retraction(); // 나머지는 fail
                 break;
                 
         case 1: c = nextchar();
@@ -33,6 +29,7 @@ void main(){
                 {
                     if(c=='o') state = 2; // fo 까지 들어온 경우
                     else state = 8;
+  
                 }
                 else if (isdigit(c)) // f 다음 숫자인 경우
                 {
@@ -40,7 +37,7 @@ void main(){
                 }
                 else {
                     printf("9 ");
-                    state = fail();
+                    state = retraction();
                 }
                 break;
 
@@ -54,7 +51,7 @@ void main(){
                 }
                 else {
                     printf("9 ");
-                    state = fail();
+                    state = retraction();
                 }
                 break;
 
@@ -66,7 +63,7 @@ void main(){
 
                 else {  // for
                     printf("1 ");
-                    state = fail(); // 다음 문자는 invalid이므로 fail처리
+                    state = retraction(); // 다음 문자는 invalid이므로 fail처리
                 }
                 break;
         
@@ -81,8 +78,10 @@ void main(){
                     state = 8;
                 else{
                     printf("9 ");
-                    state = fail();
+                    state = retraction();
                 } 
+
+                break;
 
         case 5: c = nextchar(); // if까지 받은 상태, 문자 하나 받기        
                 if (isalpha(c) || isdigit(c)) // 다음 문자가 알파벳이나 숫자인 경우 -> id
@@ -92,7 +91,7 @@ void main(){
 
                 else {  // if
                     printf("2 ");
-                    state = fail(); // 다음 문자는 invalid이므로 fail처리
+                    state = retraction(); // 다음 문자는 invalid이므로 fail처리
                 }
 
                 break;
@@ -110,7 +109,7 @@ void main(){
 
                 else{
                     printf("9 ");
-                    state = fail();
+                    state = retraction();
                 }
                 break;
         
@@ -122,7 +121,7 @@ void main(){
 
                 else {  // int
                     printf("3 ");
-                    state = fail(); // 다음 문자는 invalid이므로 fail처리
+                    state = retraction(); // 다음 문자는 invalid이므로 fail처리
                 }
 
                 break;
@@ -135,38 +134,29 @@ void main(){
 
                 else {
                     printf("9 ");
-                    state = fail();
+                    state = retraction();
                 }
         default:
             break;
         }
-
     }
-
-
-
-    
 }
 
-
-
-
-int fail(){ // Invalid char의 경우
-
+int retraction(){ // Invalid char의 경우
+    if(c == '$')
+        exit(0);
     printf("Invalid char '%c' \n", c);
 
     return 0;
 }
 
-
-char nextchar() { //문자를 입력받아 렉심 버퍼에 넣고, 개행문자는 skip, 렉심 인덱스 ++, 입력받은 문자 반환
+char nextchar() { //문자를 입력받는다 개행문자는 skip, 입력받은 문자 반환
     char c;
     while(1){
             c = getchar(); // 문자 1개를 입력받음
             if(c==' '|| c=='\t'|| c == '\n' || c == '\0') {
                 continue; // 공백, 줄바꿈,탭, NULL문자의 경우에 한하여 다시 입력받음
             }
-
             return(c); // 입력받은 문자를 반환
     }
 } 

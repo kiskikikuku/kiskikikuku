@@ -1,10 +1,14 @@
 #include<stdio.h>
+#include<stdlib.h>
+
 char nextchar();
+char nexttoken();
 void expr();
 void rest1();
 void term();
 void rest2();
 void factor();
+
 char lookahead;
 
 void main(){
@@ -26,7 +30,9 @@ void match(char token) {
     }
 }
 
-char nextchar() {
+
+char nexttoken(){
+
     char c;
 
     while(1){
